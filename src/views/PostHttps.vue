@@ -1,19 +1,19 @@
 <template>
   <div class="RestView">
-    <h1>POST</h1>
-    <p>
+    <h1 class="title">POST</h1>
+    <p class="MiddleMain">
       Para hacer una petición POST, introduce el recurso al que quieres enviar
       los datos (posts, comments, albums, etc.), el título y el cuerpo del
       mensaje y pulsa el botón "Enviar".
     </p>
     <form @submit.prevent="post">
-      <div class="form-group">
-        <label for="resource">Recurso</label>
+      <div>
+        <label for="resource">Recurso</label><br />
         <input
           type="text"
           id="resource"
           v-model="resource"
-          class="InpuntStyles"
+          class="input"
           placeholder="Ejemplo: posts"
           List="Options"
           required
@@ -28,27 +28,27 @@
         </datalist>
       </div>
       <div>
-        <label for="title">Título</label>
+        <label for="title">Título</label><br />
         <input
           type="text"
           id="title"
           v-model="title"
-          class="InpuntStyles"
+          class="input"
           placeholder="Ejemplo: Mi primer post"
           required
         />
       </div>
       <div class="form-group">
-        <label for="body">Cuerpo</label>
+        <label for="body">Cuerpo</label><br />
         <textarea
           id="body"
           v-model="body"
-          class="InpuntStyles"
+          class="input"
           placeholder="Ejemplo: Este es el contenido de mi primer post"
           required
         ></textarea>
       </div>
-      <button type="submit" class="btn btn-primary">Enviar</button>
+      <button type="submit">Enviar</button>
     </form>
     <div v-if="postData">
       <h3>Datos enviados</h3>
@@ -84,22 +84,10 @@ export default {
       resource: "",
       title: "",
       body: "",
-      getData: null,
       postData: null,
-      deleteData: null,
     };
   },
   methods: {
-    get() {
-      axios
-        .get(`https://jsonplaceholder.typicode.com/${this.resource}`)
-        .then((response) => {
-          this.getData = response.data;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    },
     post() {
       axios
         .post(`https://jsonplaceholder.typicode.com/${this.resource}`, {
@@ -108,16 +96,6 @@ export default {
         })
         .then((response) => {
           this.postData = response.data;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    },
-    delete() {
-      axios
-        .delete(`https://jsonplaceholder.typicode.com/${this.resource}`)
-        .then((response) => {
-          this.deleteData = response;
         })
         .catch((error) => {
           console.error(error);

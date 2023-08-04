@@ -1,24 +1,25 @@
 <template>
-  <div class="RestView">
-    <h1 class="TitleMain">GET</h1>
+  <div class="rest-view">
+    <h1 class="title">GET</h1>
     <div class="container">
       <div class="row">
-        <p class="MiddleMain">
+        <p class="description">
           Selecciona la categoria que deseas obtener con el metodo GET obtener
           (posts, comments, albums, etc.) y pulsa el botón "Obtener".
         </p>
         <form @submit.prevent="get">
-          <div>
+          <div class="form-group">
+            <label for="resource">Recurso</label><br />
             <input
               type="text"
               id="resource"
               v-model="resource"
-              class="InpuntStyles"
+              class="input"
               placeholder="Ejemplo: posts"
-              list="Options"
+              list="options"
               required
             />
-            <datalist id="Options">
+            <datalist id="options">
               <option value="posts" />
               <option value="comments" />
               <option value="albums" />
@@ -30,19 +31,28 @@
         </form>
         <div v-if="getData">
           <h3>Datos obtenidos</h3>
-          <div class="LayoutCards" v-for="data in getData" :key="data.id">
-            <div class="CardView">
-              <div class="Code">#{{ data.id }}</div>
-              <div class="TitleCard">{{ data.title }}</div>
-              <div class="BodyCard">{{ data.body }}</div>
-              <img v-bind:src="data.url" alt="Imagen" />
+          <div class="layout-cards" v-for="data in getData" :key="data.id">
+            <div class="card-view">
+              <div class="card__code">#{{ data.id }}</div>
+              <div class="card__title">{{ data.title }}</div>
+              <div class="card__body">{{ data.body }}</div>
+              <img
+                class="card__image"
+                v-show="data.url"
+                v-bind:src="data.url"
+                alt="Imagen"
+              />
             </div>
           </div>
+        </div>
+        <div v-else>
+          <h3>No hay datos</h3>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <script>
 import axios from "axios";
 
@@ -54,8 +64,6 @@ export default {
       title: "",
       body: "",
       getData: null,
-      postData: null,
-      deleteData: null,
     };
   },
   methods: {
@@ -69,34 +77,6 @@ export default {
           console.error(error);
         });
     },
-    post() {
-      axios
-        .post(`https://jsonplaceholder.typicode.com/${this.resource}`, {
-          title: this.title,
-          body: this.body,
-        })
-        .then((response) => {
-          this.postData = response.data;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    },
-    delete() {
-      axios
-        .delete(`https://jsonplaceholder.typicode.com/${this.resource}`)
-        .then((response) => {
-          this.deleteData = response;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    },
   },
 };
 </script>
-<style>
-.LayoutCards {
-  margin-inline: 10%;
-}
-</style>

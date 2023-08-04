@@ -14,6 +14,7 @@ export default {
   color: map-get($text-gray, 800) !important;
   margin: 50px;
   padding: 20px 100px;
+  border-radius: 10px;
 }
 @media screen and (max-width: 768px) {
   .MainRight {
@@ -21,22 +22,22 @@ export default {
     padding: 10px 20px;
   }
 }
-.TitleMain {
+.title {
   font-size: 30px !important;
   font-weight: bold;
   text-align: left;
 }
-.MiddleMain {
+.layout-cards {
   font-size: 16px !important;
   font-weight: bold;
   text-align: left;
 }
-.CardView {
+.card-view {
   display: grid;
   grid-template-columns: 50px 1fr;
-  grid-template-rows: 50px repeat(2, 1fr) 50px;
+  grid-template-rows: 50px 1fr 50px;
 }
-.Code {
+.card__code {
   display: grid;
   background: $secondary;
   color: map-get($text-gray, 100) !important;
@@ -44,26 +45,23 @@ export default {
   text-align: center;
   align-content: center;
 }
-.TitleCard {
+.card__title {
   font-size: 20px !important;
   font-weight: bold;
   text-align: right;
 }
-.BodyCard {
+.card__body {
   display: grid;
   grid-column: 2;
   text-align: center;
   align-content: center;
 }
-.Imagen {
-  display: grid;
-  text-align: center;
-  align-content: center;
-  object-fit: cover;
-  max-width: 100px;
+.card__image {
+  width: 50px;
   height: 50px;
+  object-fit: cover;
 }
-.InpuntStyles {
+.input {
   width: 300px;
   height: 40px;
   border: none;
@@ -74,10 +72,10 @@ export default {
   color: $secondary;
   padding: 10px;
 }
-.InpuntStyles:hover {
+.input:hover {
   color: map-get($text-gray, 500) !important;
 }
-.InpuntStyles::selection {
+.input::selection {
   background: $secondary;
   color: $primary;
 }
